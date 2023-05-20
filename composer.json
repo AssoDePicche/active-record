@@ -1,9 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "ActiveRecord\\": "src/ActiveRecord/",
-            "Model\\": "src/Model",
-            "SQL\\": "src/SQL"
+            "ActiveRecord\\": "src/ActiveRecord/"
         }
     }
 }
