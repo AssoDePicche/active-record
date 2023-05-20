@@ -26,7 +26,7 @@ abstract class ActiveRecord implements \Stringable, \IteratorAggregate
 
   public function __get(string $attribute): mixed
   {
-    return $this->$attribute;
+    return $this->attributes[$attribute];
   }
 
   public function __toString(): string
