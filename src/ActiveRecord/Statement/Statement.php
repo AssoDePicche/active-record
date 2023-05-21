@@ -8,5 +8,5 @@ use ActiveRecord\ActiveRecord;
 
 interface Statement
 {
-  public function execute(ActiveRecord $activeRecord): mixed;
+    public function execute(ActiveRecord $activeRecord): mixed;
 }
