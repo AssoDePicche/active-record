@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace ActiveRecord\Statement;
 
-use ActiveRecord\ActiveRecord;
+use ActiveRecord\Record;
 
 interface Statement
 {
-    public function execute(ActiveRecord $activeRecord): mixed;
+    public function execute(Record $activeRecord): mixed;
 }
