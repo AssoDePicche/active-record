@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database;
 
 use PDO;
+use PDOException;
 use PDOStatement;
 
 final readonly class Connection
@@ -18,9 +19,13 @@ final readonly class Connection
         ?string $username = null,
         ?string $password = null
     ) {
-        $this->connection = new PDO($dsn, $username, $password, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
+        try {
+            $this->connection = new PDO($dsn, $username, $password, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]);
+        } catch (PDOException $exception) {
+            echo 'Error: ' . $exception->getMessage() . PHP_EOL;
+        }
     }
 
     public function prepare(string $query): self
@@ -32,7 +37,13 @@ final readonly class Connection
 
     public function execute(array $params = null): bool
     {
-        return $this->statement->execute($params);
+        try {
+            return $this->statement->execute($params);
+        } catch (PDOException $exception) {
+            echo 'Error: ' . $exception->getMessage() . PHP_EOL;
+
+            return false;
+        }
     }
 
     public function fetch(string $class = null): object|false
