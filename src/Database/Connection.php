@@ -8,11 +8,13 @@ use PDO;
 use PDOException;
 use PDOStatement;
 
-final readonly class Connection
+final class Connection
 {
-    private PDO $connection;
+    private readonly PDO $connection;
 
     private PDOStatement $statement;
+
+    private static ?self $instance = null;
 
     public function __construct(
         string $dsn,
@@ -78,5 +80,14 @@ final readonly class Connection
         );
 
         return new self($dsn, $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+    }
+
+    public static function getInstance(): self
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = self::createFromEnv();
+        }
+
+        return self::$instance;
     }
 }
