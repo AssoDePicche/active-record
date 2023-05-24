@@ -12,7 +12,7 @@ final class Connection
 {
     private readonly PDO $connection;
 
-    private PDOStatement $statement;
+    private ?PDOStatement $statement = null;
 
     private static ?self $instance = null;
 
@@ -39,6 +39,10 @@ final class Connection
 
     public function execute(array $params = null): bool
     {
+        if (is_null($this->statement)) {
+            return false;
+        }
+
         try {
             return $this->statement->execute($params);
         } catch (PDOException $exception) {
@@ -50,6 +54,10 @@ final class Connection
 
     public function fetch(string $class = null): object|false
     {
+        if (is_null($this->statement)) {
+            return false;
+        }
+
         return $this->statement->fetchObject($class);
     }
 
@@ -66,6 +74,10 @@ final class Connection
 
     public function rowCount(): int
     {
+        if (is_null($this->statement)) {
+            return 0;
+        }
+
         return $this->statement->rowCount();
     }
 
