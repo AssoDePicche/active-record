@@ -61,12 +61,12 @@ final class Connection
         return $this->statement->fetchObject($class);
     }
 
-    public function fetchAll(string $class = null): array
+    public function fetchAll(string $class = null): Collection
     {
-        $data = [];
+        $data = new Set;
 
         while ($row = $this->fetch($class)) {
-            $data[] = $row;
+            $data->add($row);
         }
 
         return $data;
