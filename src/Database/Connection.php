@@ -69,6 +69,38 @@ final class Connection
         return $this->statement->rowCount();
     }
 
+    public function inTransaction(): bool
+    {
+        return $this->connection->inTransaction();
+    }
+
+    public function beginTransaction(): bool
+    {
+        if ($this->inTransaction()) {
+            return false;
+        }
+
+        return $this->connection->beginTransaction();
+    }
+
+    public function commit(): bool
+    {
+        if (!$this->inTransaction()) {
+            return false;
+        }
+
+        return $this->connection->commit();
+    }
+
+    public function rollBack(): bool
+    {
+        if (!$this->inTransaction()) {
+            return false;
+        }
+
+        return $this->connection->rollBack();
+    }
+
     public static function createFromEnv(): self
     {
         $dsn = sprintf(
