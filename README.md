@@ -12,35 +12,14 @@ The active record pattern is an approach to accessing data in a database. A data
 
 To contribuit to this project [follow these steps](./CONTRIBUTING).
 
-## Getting started
+## Getting Started
 
 1. Clone this repository
 
 ```bash
-git clone https://github.com/AssoDePicche/boilerplate.git
+git clone https://github.com/AssoDePicche/active-record.git
 ```
 
-## How to Use
+## Get in Touch
 
-First, you need to config the `DSN` at `.env` file in root folder, then you must create a class which represents a table at your database and extends the `ActiveRecord` class. To perform a sql statement it's necessary to instantiate the correspondent class. It's possible to perform: `Insert`, `Select`, `Update`, and `Delete`.
-
-```php
-<?php
-
-class User extends \ActiveRecord\ActiveRecord
-{
-}
-
-$model = new User;
-
-$model->username = 'Frank Miller';
-
-$statement = new \ActiveRecord\Statement\Update;
-
-$rows = $model->execute($statement);
-
-```
-
-## Get in touch
-
-Samuel do Prado Rodrigues (AssoDePicche) - samuelprado730@gmail.com
+Samuel do Prado Rodrigues (AssoDePicche) - <samuelprado730@gmail.com>
