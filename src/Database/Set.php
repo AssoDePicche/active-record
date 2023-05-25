@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Database;
 
-use ArrayIterator;
-use Traversable;
-
 final class Set implements Collection
 {
     private array $data;
@@ -36,9 +33,14 @@ final class Set implements Collection
         return ($this->count() === 0);
     }
 
-    public function getIterator(): Traversable
+    public function sort(): void
     {
-        return new ArrayIterator($this->data);
+        sort($this->data);
+    }
+
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator($this->data);
     }
 
     public function jsonSerialize(): mixed
