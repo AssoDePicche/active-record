@@ -8,7 +8,7 @@ use PDO;
 use PDOException;
 use PDOStatement;
 
-final class Connection
+final class Connection implements Database
 {
     private readonly PDO $connection;
 
@@ -52,7 +52,7 @@ final class Connection
         }
     }
 
-    public function fetch(string $class = null): object|false
+    public function fetch(?string $class = null): object|false
     {
         if (is_null($this->statement)) {
             return false;
@@ -61,7 +61,7 @@ final class Connection
         return $this->statement->fetchObject($class);
     }
 
-    public function fetchAll(string $class = null): Collection
+    public function fetchAll(?string $class = null): Collection
     {
         $data = new Set;
 
@@ -123,7 +123,11 @@ final class Connection
             $_ENV['DB_DATABASE']
         );
 
-        return new self($dsn, $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
+        return new self(
+            $dsn,
+            $_ENV['DB_USERNAME'],
+            $_ENV['DB_PASSWORD']
+        );
     }
 
     public static function getInstance(): self
