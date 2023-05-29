@@ -7,6 +7,7 @@ namespace Database;
 interface Database
 {
     public function __construct(string $dsn, ?string $username = null, ?string $password = null);
+    
     public function prepare(string $query): self;
 
     public function execute(?array $params = null): bool;
