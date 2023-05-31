@@ -19,7 +19,7 @@ interface Database
 
     public function inTransaction(): bool;
 
-    public function beginTransaction(): self;
+    public function beginTransaction(): bool;
 
     public function commit(): bool;
 
