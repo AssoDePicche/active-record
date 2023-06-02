@@ -8,7 +8,7 @@ use Shared\Adapter\Contract\DatabaseDriver;
 
 final class DatabaseDriverFactory
 {
-    private static ?DatabaseDriver $databaseDriver;
+    private static ?DatabaseDriver $databaseDriver = null;
 
     public static function createFromEnv(): DatabaseDriver
     {
