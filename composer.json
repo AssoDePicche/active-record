@@ -2,7 +2,10 @@
     "autoload": {
         "psr-4": {
             "ActiveRecord\\": "src/ActiveRecord/",
-            "Database\\": "src/Database"
+            "Shared\\": "src/Shared/"
         }
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^5.5"
     }
 }
