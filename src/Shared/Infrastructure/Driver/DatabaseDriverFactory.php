@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shared\Adapter\Infrastructure\Driver;
+namespace Shared\Infrastructure\Driver;
 
 use Shared\Adapter\Contract\DatabaseDriver;
 
