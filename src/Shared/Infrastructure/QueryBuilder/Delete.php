@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Shared\Infrastructure\QueryBuilder;
 
 use Shared\Adapter\Contract\QueryBuilder\DeleteStatement;
+use Shared\Infrastructure\QueryBuilder\Clause\WhereClause;
 
 final class Delete implements DeleteStatement
 {
+    use WhereClause;
+
     private string $query = '';
 
     public function __toString(): string
@@ -17,18 +20,7 @@ final class Delete implements DeleteStatement
 
     public function from(string $table): self
     {
-        $this->query = 'DELETE FROM ' . $table . ' ';
-
-        return $this;
-    }
-
-    public function where(string $field, mixed $value, string $operator): self
-    {
-        if (is_string($value)) {
-            $value = "'{$value}'";
-        }
-
-        $this->query .= 'WHERE ' . $field . ' ' . $operator . ' ' . $value . ' ';
+        $this->query = sprintf('DELETE FROM %s ', $table);
 
         return $this;
     }

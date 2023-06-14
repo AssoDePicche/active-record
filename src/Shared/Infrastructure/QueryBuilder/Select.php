@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Shared\Infrastructure\QueryBuilder;
 
 use Shared\Adapter\Contract\QueryBuilder\SelectStatement;
+use Shared\Infrastructure\QueryBuilder\Clause\WhereClause;
 
 final class Select implements SelectStatement
 {
+    use WhereClause;
+
     private string $query = '';
 
     public function __toString(): string
@@ -32,39 +35,14 @@ final class Select implements SelectStatement
 
     public function from(string $table): self
     {
-        $this->query .= ' FROM ' . $table . ' ';
-
-        return $this;
-    }
-
-    public function where(string $field, mixed $value, string $operator): self
-    {
-        if (is_string($value)) {
-            $value = "'{$value}'";
-        }
-
-        $this->query .= 'WHERE ' . $field . ' ' . $operator . ' ' . $value . ' ';
-
-        return $this;
-    }
-
-    public function and(): self
-    {
-        $this->query .= ' AND ';
-
-        return $this;
-    }
-
-    public function or(): self
-    {
-        $this->query .= ' OR ';
+        $this->query .= 'FROM ' . $table . ' ';
 
         return $this;
     }
 
     public function groupBy(array $columns): self
     {
-        $this->query .= ' GROUP BY ';
+        $this->query .= 'GROUP BY ';
 
         $this->addColumns($columns);
 
@@ -73,7 +51,7 @@ final class Select implements SelectStatement
 
     public function orderBy(array $columns): self
     {
-        $this->query .= ' ORDER BY ';
+        $this->query .= 'ORDER BY ';
 
         $this->addColumns($columns);
 
@@ -82,7 +60,7 @@ final class Select implements SelectStatement
 
     public function limit(int $limit, int $offset = 0): self
     {
-        $this->query .= ' LIMIT ' . $limit . ', ' . $offset;
+        $this->query .= 'LIMIT ' . $limit . ', ' . $offset;
 
         return $this;
     }
